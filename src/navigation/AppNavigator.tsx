@@ -29,6 +29,7 @@ import ProfileScreen from '../screens/marketplace/ProfileScreen';
 import SavedListingsScreen from '../screens/marketplace/SavedListingsScreen';
 import MyListingsScreen from '../screens/marketplace/MyListingsScreen';
 import SellerProfileScreen from '../screens/marketplace/SellerProfileScreen';
+import ShopScreen from '../screens/marketplace/ShopScreen';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
@@ -74,6 +75,17 @@ function HomeNavigator() {
       <HomeStack.Screen name="Settings" component={ProfileScreen} />
       {sharedScreens(HomeStack)}
     </HomeStack.Navigator>
+  );
+}
+
+const ShopStack = createNativeStackNavigator<MarketplaceStackParamList>();
+function ShopNavigator() {
+  return (
+    <ShopStack.Navigator screenOptions={{ headerShown: false }}>
+      <ShopStack.Screen name="Browse" component={ShopScreen} />
+      <ShopStack.Screen name="Home" component={HomeScreen} />
+      {sharedScreens(ShopStack)}
+    </ShopStack.Navigator>
   );
 }
 
@@ -171,6 +183,16 @@ function MainNavigator() {
           tabBarLabel: 'Browse',
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons name={focused ? 'search' : 'search-outline'} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ShopTab"
+        component={ShopNavigator}
+        options={{
+          tabBarLabel: 'Shop',
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? 'bag' : 'bag-outline'} size={size} color={color} />
           ),
         }}
       />
